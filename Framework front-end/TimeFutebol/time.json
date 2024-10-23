@@ -1,0 +1,58 @@
+{
+    "team": "Cuiabá",
+    "players": [
+      {
+        "name": "João Silva",
+        "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Walter-Cuiaba-Palmeiras-jul-2022_%28cropped%29.jpg/250px-Walter-Cuiaba-Palmeiras-jul-2022_%28cropped%29.jpg",
+        "position": "Goleiro",
+        "number": 1,
+        "nationality": "Brazilian",
+        "age": 30
+      },
+      {
+        "name": "Alan Empereur",
+        "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Alan-Empereur-Cuiaba-Palmeiras-jul-2022.jpg/220px-Alan-Empereur-Cuiaba-Palmeiras-jul-2022.jpg",
+        "position": "Zagueiro",
+        "number": 4,
+        "nationality": "Brazilian",
+        "age": 28
+      },
+      {
+        "name": "Rhyan",
+        "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Brasileir%C3%A3o_2022-_Corinthians_1x0_Cear%C3%A1_-_Fernando_Sobral.jpg/100px-Brasileir%C3%A3o_2022-_Corinthians_1x0_Cear%C3%A1_-_Fernando_Sobral.jpg",
+        "position": "Meio-campista",
+        "number": 8,
+        "nationality": "Brazilian",
+        "age": 25
+      },
+      {
+        "name": "Cristiano Ronaldo",
+        "foto": "https://www.folhamax.com//storage/webdisco/2022/11/24/395x253/6c845fb76e48c48b78893f5b98158d5a.jpg",
+        "position": "Atacante",
+        "number": 9,
+        "nationality": "Brazilian",
+        "age": 27
+      },
+      {
+        "name": "Elton",
+        "foto": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Elton_Rodrigues.jpg/200px-Elton_Rodrigues.jpg",
+        "position": "Meio-campista",
+        "number": 10,
+        "nationality": "Brazilian",
+        "age": 39
+      },
+      {
+        "name": "Vinicius Ferreira",
+        "foto": "foto.jpeg",
+        "position": "Zagueiro",
+        "number": 13,
+        "age": 22
+      }
+    ],
+    "coach": {
+      "name": "Rafael Oliveira",
+      "age": 45,
+      "nationality": "Brazilian"
+    }
+  }
+  

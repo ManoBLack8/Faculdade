@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Times</title>
+        
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+<body>
+    <div class="container-fluid mt-5">
+        <div class="row text-center" id="jogadores-row">
+            <!-- Jogadores serão carregados aqui -->
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $.getJSON('time.json', function(data) {
+                let jogadores = data.players;
+
+                $.each(jogadores, function(index, jogador) {
+                    let card = `
+                        <div class="col-md-4">
+                            <div class="card-body card-jogador">
+                                <img src="${jogador.foto}" alt="Jogador" style="height:200px" class="img-fluid jogador">
+                                <h1>${jogador.name} - <b>${jogador.age} anos</b></h1>
+                                <h2>${jogador.position}</h2>
+                                <h3>Camisa: ${jogador.number}</h3>
+                            </div>
+                        </div>
+                    `;
+                    $('#jogadores-row').append(card);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+<style>
+    body{
+        background-image: url("https://esporteclubebahia.b-cdn.net/wp-content/uploads/2014/07/logo-cuiaba-4096-300x300.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 50%;
+
+    }
+    .card-jogador{
+        background-color: #32bd3993;
+        border: 1px solid;
+        border-radius: 20px;
+        margin-bottom: 20px;
+    }
+    .card-jogador:hover{
+        background-color: #32bd39;
+        color: #fff;
+        box-shadow:#000, 4px;
+    }
+
+</style>

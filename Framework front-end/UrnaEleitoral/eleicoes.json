@@ -1,0 +1,39 @@
+{
+    "eleicao": {
+      "prefeitura": [
+        {
+          "nome": "Lúdio",
+          "partido": "Partido dos Trabalhadores (PT)",
+          "numero": 13,
+          "foto": "https://www.parlamentonews.com.br/media/k2/items/cache/4b0a3f295543bcdb7e84aacab1169fb5_XL.jpg"
+        },
+        {
+          "nome": "Abilio Brunini",
+          "partido": "Partido Liberal (PL)",
+          "numero": 22,
+          "foto": "https://img.band.uol.com.br/image/2023/07/12/deputado-abilio-brunini-pl-mt-durante-discurso-no-plenario-da-camara-7536_800x450.webp"
+        }
+      ],
+      "vereadores": [
+        {
+          "nome": "Kid Bengala",
+          "partido": "Partido Brasileiro (PB)",
+          "numero": 44069,
+          "foto": "https://midias.correiobraziliense.com.br/_midias/jpg/2022/08/18/675x450/1_kid_bengala-26257317.jpeg?20220818172356?20220818172356"
+        },
+        {
+          "nome": "Paulo Kogos",
+          "partido": "Partido do CAPS Brasileira (PSDB)",
+          "numero": 45555,
+          "foto": "https://cdn.prod.website-files.com/60ff690cd7b0537edb99a29a/6704565eaba3bd378c97a443_AD_4nXee1FX-df_V4UiKR3ir60G39ORM1NBtP-DTqCe4moEmOmSdfdTgrbRM1kCrAAlvTKgZ7Oed5CAHOoPL1c_uy3Cr7bIWSwSNZmEMbL5x532vVyEsoeQMh_hV-XaKFCvgCNBr5z8wPstxN12Va508Xhtdi5w.jpeg"
+        },
+        {
+          "nome": "Toninho do Diabo",
+          "partido": "Partido Comunista do Brasil (PCdoB)",
+          "numero": 13666,
+          "foto": "https://p2.trrsf.com/image/fget/cf/774/0/images.terra.com/2014/08/26/toninho-do-diabodiv2.jpg"
+        }
+      ]
+    }
+  }
+  

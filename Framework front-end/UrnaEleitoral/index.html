@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Urna Eletrônica</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: #e9ecef;">
+    <div class="container mt-5">
+        <h1 class="text-center">Simulador de Urna Eletrônica</h1>
+        <hr>
+        <div class="row shadow-lg bg-dark text-white p-4 rounded" style="max-width: 900px; margin: auto;">
+            <div class="col-lg-7 d-flex align-items-center justify-content-center" style="background-color: #343a40; height: 400px;">
+                <div class="tela text-center">
+                    <h1 id="cargo">Prefeito</h1>
+                    <h3>SEU VOTO PARA</h3>
+                    <div class="resultado mt-4">
+                        <h2 id="candidato">---</h2>
+                        <img id="foto-candidato" src="" alt="Foto do Candidato" class="img-fluid mt-2" style="max-height: 200px; display: none;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 bg-light p-4">
+                <div class="Teclado row">
+                    <div class="teclado text-center w-100">
+                        <div class="teclado--linha row justify-content-center">
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('1')">1</div>
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('2')">2</div>
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('3')">3</div>
+                        </div>
+                        <div class="teclado--linha row justify-content-center">
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('4')">4</div>
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('5')">5</div>
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('6')">6</div>
+                        </div>
+                        <div class="teclado--linha row justify-content-center">
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('7')">7</div>
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('8')">8</div>
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('9')">9</div>
+                        </div>
+                        <div class="teclado--linha row justify-content-center">
+                            <div class="btn btn-secondary m-2" style="width: 80px; height: 60px;" onclick="clicou('0')">0</div>
+                        </div>
+                        <div class="teclado--linha row justify-content-center mt-3">
+                            <div class="btn btn-light text-dark m-2" style="height: 60px;" onclick="branco()">BRANCO</div>
+                            <div class="btn btn-warning m-2" style="height: 60px;" onclick="corrige()">CORRIGE</div>
+                            <div class="btn btn-success m-2" style="height: 60px;" onclick="confirma()">CONFIRMA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var texto = '';
+        let cargo = "prefeito";
+        var candidatos;
+
+        // Carregar o JSON com candidatos
+        $.getJSON('eleicoes.json', function(data) {
+            candidatos = data.eleicao;
+            $("#cargo").html(cargo.charAt(0).toUpperCase() + cargo.slice(1)); // Mostrar o cargo
+        });
+
+        function clicou(numero) {
+            if ((cargo == "vereador" && texto.length < 5) || (cargo == "prefeito" && texto.length < 2)) {
+                texto += numero;
+                $("#candidato").html(texto);
+                buscarCandidato(cargo, texto);
+            }
+        }
+
+        function buscarCandidato(cargo, numero) {
+            var lista = candidatos[cargo === 'prefeito' ? 'prefeitura' : 'vereadores'];
+            var candidato = lista.find(c => c.numero == numero);
+            
+            if (candidato) {
+                if ((cargo == "vereador" && texto.length == 5) || (cargo == "prefeito" && texto.length == 2)) {
+                    $("#candidato").html(candidato.nome + " - " + candidato.partido);
+                    $("#foto-candidato").attr("src", candidato.foto).show();
+                }
+            } else {
+                if ((cargo == "vereador" && texto.length == 5) || (cargo == "prefeito" && texto.length == 2)) {
+                    $("#candidato").html("Número inválido");
+                    $("#foto-candidato").hide();
+                }
+            }
+        }
+
+        function branco() {
+            $("#candidato").html("VOTO EM BRANCO");
+            $("#foto-candidato").hide();
+        }
+
+        function corrige() {
+            texto = '';
+            $("#candidato").html("---");
+            $("#foto-candidato").hide();
+        }
+
+        function confirma() {
+            if (texto) {
+                $("#candidato").html("---");
+                $("#foto-candidato").hide();
+                var audio = new Audio('confirma-urna.mp3');
+                audio.play();
+                
+                if (cargo == "prefeito") {
+                    cargo = "vereador";
+                    $("#cargo").html("Vereador");
+                } else {
+                    $("#cargo").html("FIM");
+                    $("#candidato").hide();
+                    $(".tela h3").hide();
+                }
+
+                texto = '';
+            }
+        }
+    </script>
+</body>
+</html>
