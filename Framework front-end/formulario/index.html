@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-12  mt-5">
+                <form class="formulario">
+                    <div class="titulo text-center">
+                        <h1>Formulario</h1>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nome">Nome</label>
+                        <input type="text" class="form-control" id="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="sexo">Sexo</label>
+                        <select name="sexo" id="sexo">
+                            <option value="M">M</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h6>Qual seu pet favorito ?</h6><br>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="pet" id="Gato" value="Gato">
+                            <label class="form-check-label" for="Gato">Gato</label><br>
+                            <input type="radio" class="form-check-input" name="pet" id="Cachorro" value="Cachorro">
+                            <label class="form-check-label" for="Cachorro">Cachorro</label><br>
+                            <input type="radio" class="form-check-input" name="pet" id="Peixe" value="Peixe">          
+                            <label class="form-check-label" for="Peixe">Peixe</label><br>
+                            <input type="radio" class="form-check-input" name="pet" id="Hamster" value="Hamster">
+                            <label class="form-check-label" for="Hamster">Hamster</label><br>
+    
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <input type="reset" class="btn btn-secondary" id="resetar">
+                        <input type="submit" onclick="enviar()" class="btn btn-success" id="enviar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    body .row {
+        width: 100%;
+    }
+</style>
+
+<script>
+    function getUrlVars()
+    {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+switch (getUrlVars()["pet"]) {
+    case 'Hamster':
+        alert("VOCÊ PISOU NO HAMISTER");    
+        break;
+    case 'Gato':
+        alert("Arranhou você");    
+        break;
+    case 'Cachorro':
+        alert("Mordeu Você");    
+        break;
+    case 'Peixe':
+        alert("o peixe faz ? ");    
+        break;
+
+    default:
+        break;
+}
+
+</script>
