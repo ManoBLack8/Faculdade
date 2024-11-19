@@ -22,13 +22,20 @@
                         <input type="text" class="form-control" id="nome">
                     </div>
                     <div class="form-group">
-                        <label for="sexo">Sexo</label>
-                        <select name="sexo" id="sexo">
-                            <option value="M">M</option>
-                            <option value="F">F</option>
-                        </select>
+                        <h6>Qual seu pet favorito ?</h6><br>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" name="pet" id="Gato" value="Gato">
+                            <label class="form-check-label" for="Gato">Gato</label><br>
+                            <input type="radio" class="form-check-input" name="pet" id="Cachorro" value="Cachorro">
+                            <label class="form-check-label" for="Cachorro">Cachorro</label><br>
+                            <input type="radio" class="form-check-input" name="pet" id="Peixe" value="Peixe">          
+                            <label class="form-check-label" for="Peixe">Peixe</label><br>
+                            <input type="radio" class="form-check-input" name="pet" id="Hamster" value="Hamster">
+                            <label class="form-check-label" for="Hamster">Hamster</label><br>
+    
+                        </div>
                     </div>
-                    <div id="status"></div>
+
 
                     <div class="form-group">
                         <input type="reset" class="btn btn-secondary" id="resetar">
@@ -62,13 +69,18 @@
         return vars;
     }
 
-switch (getUrlVars()["sexo"]) {
-    case 'H':
-        $("#status").html("<div class='badge badge-success'>Homem</div> ")    
+switch (getUrlVars()["pet"]) {
+    case 'Hamster':
+        alert("VOCÊ PISOU NO HAMISTER");    
         break;
-    case 'F':
-        alert("Arranhou você");
-        $("#status").html("<div class='badge badge-success'>Mulher</div> ") 
+    case 'Gato':
+        alert("Arranhou você");    
+        break;
+    case 'Cachorro':
+        alert("Mordeu Você");    
+        break;
+    case 'Peixe':
+        alert("o peixe faz ? ");    
         break;
 
     default:

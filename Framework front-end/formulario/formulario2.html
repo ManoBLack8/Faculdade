@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-12 mt-5">
+                <form class="formulario">
+                    <div class="titulo text-center">
+                        <h1>Formulário</h1>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="sexo">Sexo</label>
+                        <select name="sexo" id="sexo" class="form-control">
+                            <option value="M">M</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+                    <div class="form-group text-center">
+                        <!-- Botões adicionais -->
+                        <button type="button" class="btn btn-info" id="opcao1">Opção 1</button>
+                        <button type="button" class="btn btn-warning" id="opcao2">Opção 2</button>
+                        <button type="button" class="btn btn-danger" id="opcao3">Opção 3</button>
+                    </div>
+                    <div class="form-group">
+                        <input type="reset" class="btn btn-secondary" id="resetar">
+                        <input type="submit" class="btn btn-success" id="enviar" value="Enviar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    body .row {
+        width: 100%;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        // Validação do formulário
+        $(".formulario").on("submit", function (e) {
+            e.preventDefault(); // Impede o envio do formulário
+
+            let nome = $("#nome").val().trim();
+
+            if (nome === "") {
+                alert("Por favor, preencha o campo Nome.");
+                return;
+            }
+
+            alert("Formulário enviado com sucesso!");
+        });
+
+        // Eventos dos botões adicionais
+        $("#opcao1").click(function () {
+            alert("Você clicou na Opção 1!");
+        });
+
+        $("#opcao2").click(function () {
+            alert("Você clicou na Opção 2!");
+        });
+
+        $("#opcao3").click(function () {
+            alert("Você clicou na Opção 3!");
+        });
+    });
+
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    switch (getUrlVars()["pet"]) {
+        case 'Hamster':
+            alert("VOCÊ PISOU NO HAMSTER");
+            break;
+        case 'Gato':
+            alert("Arranhou você");
+            break;
+        case 'Cachorro':
+            alert("Mordeu Você");
+            break;
+        case 'Peixe':
+            alert("O peixe faz?");
+            break;
+        default:
+            break;
+    }
+</script>
