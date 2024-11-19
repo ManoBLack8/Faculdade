@@ -42,7 +42,7 @@
     
                         </div>
                     </div>
-                    
+                    <div id="status">
 
                     <div class="form-group">
                         <input type="reset" class="btn btn-secondary" id="resetar">
@@ -75,7 +75,7 @@
         }
         return vars;
     }
-
+$("#status").html("<div class='.badge-success'>Sucesso!!</div> ")
 switch (getUrlVars()["pet"]) {
     case 'Hamster':
         alert("VOCÊ PISOU NO HAMISTER");    
