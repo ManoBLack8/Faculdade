@@ -13,13 +13,12 @@ public class Filme {
     private String capa; 
 
     // Construtor
-    public Filme(String titulo, Date dataLancamento, String diretor, double nota, String genero, String capa) {
+    public Filme(String titulo, Date dataLancamento, String diretor, double nota, String genero) {
         this.titulo = titulo;
         this.dataLancamento = dataLancamento;
         this.diretor = diretor;
         this.nota = nota;
         this.genero = genero;
-        this.capa = capa;
     }
 
     // Getters e Setters
