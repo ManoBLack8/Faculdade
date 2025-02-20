@@ -2,10 +2,8 @@ package model;
 
 public class Avalicoes {
     private int Id;
-    private String titulo;
     private double nota;
     private String comentario;
-    private int UsuarioId;
     private int FilmeId;
 
     public int getId() {
@@ -20,12 +18,6 @@ public class Avalicoes {
     public void setFilmeId(int filmeId) {
         FilmeId = filmeId;
     }
-    public String getTitulo() {
-        return titulo;
-    }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
     public double getNota() {
         return nota;
     }
@@ -38,23 +30,13 @@ public class Avalicoes {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
-    public int getUsuarioId() {
-        return UsuarioId;
-    }
-    public void setUsuarioId(int usuarioId) {
-        UsuarioId = usuarioId;
-    }
-
     @Override
     public String toString() {
         return "Avalicao{" +
                 "id=" + Id +
-                ", titulo='" + titulo + '\'' +
                 ", comentario=" + comentario +
                 ", nota='" + nota + '\'' +
-                ", nota=" + nota +
                 ", FilmeId='" + FilmeId + '\'' +
-                ", UsuarioId='" + UsuarioId + '\'' +
                 '}';
     }
 

@@ -1,8 +1,10 @@
 package view;
 
 import controller.FilmeController;
+import dao.GeneroDAO;
 import model.Avalicoes;
 import model.Filme;
+import model.Genero;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +17,12 @@ import java.util.List;
 
 public class FilmeView extends JFrame {
     private FilmeController controller;
+    private GeneroDAO generoDAO;
     private JPanel gridPanel;
 
     public FilmeView() {
         this.controller = new FilmeController();
+        this.generoDAO = new GeneroDAO();
         initComponents();
     }
 
@@ -70,15 +74,73 @@ public class FilmeView extends JFrame {
     }
 
     private void editarFilme() {
+        // Solicita o título do filme a ser editado
         String tituloBusca = JOptionPane.showInputDialog(this,
                 "Digite o título do filme para buscar:",
                 "Buscar Filme", JOptionPane.QUESTION_MESSAGE);
-
+    
         if (tituloBusca == null || tituloBusca.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Título inválido! A busca foi cancelada.",
                     "Erro", JOptionPane.ERROR_MESSAGE);
             return;
+        }
+    
+        // Busca o filme pelo título
+        Filme filmeParaEditar = controller.buscarFilmePorTitulo(tituloBusca);
+        if (filmeParaEditar == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Filme não encontrado!",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+        // Cria os campos de edição com os dados atuais do filme
+        JTextField tituloField = new JTextField(filmeParaEditar.getTitulo());
+        JTextField dataField = new JTextField(new SimpleDateFormat("dd/MM/yyyy").format(filmeParaEditar.getDataLancamento()));
+        JTextField diretorField = new JTextField(filmeParaEditar.getDiretor());
+        JTextField notaField = new JTextField(String.valueOf(filmeParaEditar.getNota()));
+    
+        // Cria um JComboBox para selecionar o gênero
+        JComboBox<String> generoComboBox = new JComboBox<>();
+        for (Genero genero : generoDAO.listarGeneros()) {
+            generoComboBox.addItem(genero.getNome()); // Adiciona o nome do gênero
+        }
+    
+        // Painel para editar os campos
+        JPanel panel = new JPanel(new GridLayout(5, 2));
+        panel.add(new JLabel("Título:"));
+        panel.add(tituloField);
+        panel.add(new JLabel("Data de Lançamento (dd/MM/yyyy):"));
+        panel.add(dataField);
+        panel.add(new JLabel("Diretor:"));
+        panel.add(diretorField);
+        panel.add(new JLabel("Nota:"));
+        panel.add(notaField);
+        panel.add(new JLabel("Gênero:"));
+        panel.add(generoComboBox);
+    
+        int result = JOptionPane.showConfirmDialog(
+                this, panel, "Editar Filme", JOptionPane.OK_CANCEL_OPTION);
+    
+        if (result == JOptionPane.OK_OPTION) {
+            try {
+                // Obtém os novos valores dos campos
+                String novoTitulo = tituloField.getText();
+                Date novaDataLancamento = new SimpleDateFormat("dd/MM/yyyy").parse(dataField.getText());
+                String novoDiretor = diretorField.getText();
+                double novaNota = Double.parseDouble(notaField.getText());
+                String novoGenero = (String) generoComboBox.getSelectedItem();
+    
+                // Atualiza o filme no controller
+                controller.atualizarFilme(filmeParaEditar.getId(), novoTitulo, novaDataLancamento, novoDiretor, novaNota, novoGenero);
+                atualizarGrid(); // Atualiza a exibição dos filmes
+                JOptionPane.showMessageDialog(this, "Filme editado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(this, "Formato de data inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Nota inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -88,7 +150,7 @@ public class FilmeView extends JFrame {
     }
 
     private void salvarNoJson() {
-        controller.adicionarFilme(getTitle(), null, getWarningString(), DO_NOTHING_ON_CLOSE, getName());;
+        controller.adicionarFilme(getTitle(), null, getWarningString(), DO_NOTHING_ON_CLOSE, getName());
         JOptionPane.showMessageDialog(this, "Dados salvos no arquivo JSON.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -141,7 +203,12 @@ public class FilmeView extends JFrame {
         JTextField dataField = new JTextField();
         JTextField diretorField = new JTextField();
         JTextField notaField = new JTextField();
-        JTextField generoField = new JTextField();
+
+        // Cria um JComboBox para selecionar o gênero
+        JComboBox<Genero> generoComboBox = new JComboBox<>();
+        for (Genero genero : generoDAO.listarGeneros()) {
+            generoComboBox.addItem(genero);
+        }
 
         JPanel panel = new JPanel(new GridLayout(5, 2));
         panel.add(new JLabel("Título:"));
@@ -153,7 +220,7 @@ public class FilmeView extends JFrame {
         panel.add(new JLabel("Nota:"));
         panel.add(notaField);
         panel.add(new JLabel("Gênero:"));
-        panel.add(generoField);
+        panel.add(generoComboBox);
 
         int result = JOptionPane.showConfirmDialog(
                 this, panel, "Adicionar Filme", JOptionPane.OK_CANCEL_OPTION);
@@ -164,9 +231,9 @@ public class FilmeView extends JFrame {
                 Date dataLancamento = new SimpleDateFormat("dd/MM/yyyy").parse(dataField.getText());
                 String diretor = diretorField.getText();
                 double nota = Double.parseDouble(notaField.getText());
-                String genero = generoField.getText();
+                Genero genero = (Genero) generoComboBox.getSelectedItem();
 
-                controller.adicionarFilme(titulo, dataLancamento, diretor, nota, genero);
+                controller.adicionarFilme(titulo, dataLancamento, diretor, nota, genero.getNome());
                 atualizarGrid();
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Formato de data inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
