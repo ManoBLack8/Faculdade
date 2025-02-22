@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Enviado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        form {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+            padding: 20px 30px;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+            background-color: #f9f9f9;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .col-12 {
+            flex: 1 1 100%;
+        }
+
+        .col-lg-6 {
+            flex: 1 1 calc(50% - 10px);
+        }
+
+        @media (max-width: 768px) {
+            .col-lg-6 {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+    <script>
+        // Função para preencher os campos com base nos parâmetros da URL
+        function preencherFormulario() {
+            const params = new URLSearchParams(window.location.search);
+
+            document.getElementById('bb-name').value = params.get('bb-name') || '';
+            document.getElementById('bb-phone').value = params.get('bb-phone') || '';
+            document.getElementById('bb-time').value = params.get('bb-time') || '';
+            document.getElementById('bb-branch').value = params.get('bb-branch') || '';
+            document.getElementById('bb-date').value = params.get('bb-date') || '';
+            document.getElementById('bb-number').value = params.get('bb-number') || '';
+            document.getElementById('bb-message').value = params.get('bb-message') || '';
+        }
+
+        window.onload = preencherFormulario;
+    </script>
+</head>
+<body>
+    <form>
+        <h1>Formulário Preenchido</h1>
+        <p>Os dados foram enviados. Logo entraremos em contato</p>
+        <div class="row">
+            <!-- Campo para nome completo -->
+            <div class="col-lg-6 col-12">
+                <input type="text" id="bb-name" class="form-control" placeholder="Nome Completo" readonly>
+            </div>
+
+            <!-- Campo para número de telefone -->
+            <div class="col-lg-6 col-12">
+                <input type="tel" id="bb-phone" class="form-control" placeholder="(65) 99243-0023" readonly>
+            </div>
+
+            <!-- Campo para horário -->
+            <div class="col-lg-6 col-12">
+                <input class="form-control" type="time" id="bb-time" readonly>
+            </div>
+
+            <!-- Seleção de filial -->
+            <div class="col-lg-6 col-12">
+                <select class="form-select form-control" id="bb-branch" disabled>
+                    <option value="" disabled selected>Selecione a Filial</option>
+                    <option value="Grünberger">Presencial: Cuiabá - MT</option>
+                    <option value="Behrenstraße">Online</option>
+                </select>
+            </div>
+
+            <!-- Campo para data -->
+            <div class="col-lg-6 col-12">
+                <input type="date" id="bb-date" class="form-control" readonly>
+            </div>
+
+            <!-- Campo para número de pessoas -->
+            <div class="col-lg-6 col-12">
+                <input type="number" id="bb-number" class="form-control" placeholder="Quantidade de Veículos" readonly>
+            </div>
+        </div>
+
+        <!-- Campo para mensagem adicional -->
+        <textarea id="bb-message" rows="3" class="form-control" placeholder="Comentário (Opcional)" readonly></textarea>
+    </form>
+</body>
+</html>
+

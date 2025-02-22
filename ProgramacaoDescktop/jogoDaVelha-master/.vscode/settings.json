@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\vinic\\OneDrive\\Documentos\\Faculdade\\ProgramacaoDescktop\\projeto final\\Projeto final\\lib\\gson-2.2.2.jar"
+    ]
+}
